@@ -33,13 +33,13 @@ import * as process from "process";
 export class AppModule {
 
   onModuleInit() {
-    console.log('AppModule-----onModuleInit------');
+    console.log('AppModule--初始化---onModuleInit------');
   }
   onModuleDestroy() {
-    console.log('onModuleDestroy----');
+    console.log('onModuleDestroy--卸载--');
   }
 }
 process.on('exit', () => {
-  console.log('Application is closing111');
+  console.log('Application 程序关闭了');
   // 执行其他清理操作
 });

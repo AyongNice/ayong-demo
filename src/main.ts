@@ -31,6 +31,6 @@ async function bootstrap() {
     app.close()
   },1000)
 }
-//开始
+//开始运行
 bootstrap();
 
