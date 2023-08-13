@@ -5,6 +5,12 @@ import { AyongModule } from "./ayong/ayong.module";
 import { ConfigModule } from "@nestjs/config";
 import * as process from "process";
 
+//onModuleInit 初始化
+//onModuleDestroy 卸载
+/**
+ * 生命周期
+ * 钩子
+ */
 @Module({
   imports: [AyongModule, ConfigModule.forRoot({
     isGlobal: true // 让配置在整个应用中可用
@@ -30,13 +36,19 @@ import * as process from "process";
   }
   ]
 })
+
 export class AppModule {
 
-  onModuleInit() {
-    console.log('AppModule--初始化---onModuleInit------');
+  constructor() {
+    console.log('构造函数---生命周期执行')
   }
-  onModuleDestroy() {
-    console.log('onModuleDestroy--卸载--');
+  onModuleInit(){
+    console.log('模块初始化----onModuleInit--生命周期执行')
+
+  }
+  onModuleDestroy(){
+    console.log('模块初卸载----onModuleInit--生命周期执行')
+
   }
 }
 process.on('exit', () => {
