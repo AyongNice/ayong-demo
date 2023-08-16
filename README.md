@@ -1,3 +1,5 @@
+# nestjs 教学视频见B站UP主 阿勇学前端,视频链接如下
+https://www.bilibili.com/video/BV1tu4y1B78C/?spm_id_from=333.788.recommend_more_video.3&vd_source=ee2a7a56a9afcb06acac540b18419096
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
