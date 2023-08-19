@@ -7,7 +7,7 @@ import {WeekendModule} from './weekend/weekend.module';
 import {RestDaysModule} from './rest-days/rest-days.module';
 import {Config} from "./config";
 import * as process from "process";
-
+import { join } from 'path';
 /**
  * 服务端
  * 模块
@@ -42,12 +42,9 @@ import * as process from "process";
     }
     ]
 })
-
 export class AppModule {
 
-    constructor() {
-        // console.log('构造函数---生命周期执行')
-    }
+
 
     onModuleInit() {
         // console.log('模块初始化----onModuleInit--生命周期执行')
@@ -58,6 +55,7 @@ export class AppModule {
         // console.log('模块初卸载----onModuleInit--生命周期执行')
 
     }
+
 }
 
 process.on('exit', () => {

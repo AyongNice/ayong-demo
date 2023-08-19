@@ -1,27 +1,25 @@
 import {NestFactory} from "@nestjs/core";
 import {AppModule} from "./app.module";
 import {VersioningType} from "@nestjs/common";
-//yarn add @types/express-session 代码提示
-//yarn add express-session
 import * as cors from 'cors';
-
 import * as session from "express-session";
-import {isLogLevelEnabled} from "@nestjs/common/services/utils";
-import {Request, Response, NextFunction} from 'express'
-
+import {Request, Response, NextFunction, json} from 'express'
+import {NestExpressApplication} from "@nestjs/platform-express";
+import {join, extname} from "path";
 function IkunAll(req: Request, res: Response, next: NextFunction) {
     next();
 }
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+
     /**
      * type:后端接口版本
      */
     app.enableVersioning({
         type: VersioningType.URI
     });
-
     /**
      * 微信公众号  阿勇学前端
      * secret    生成服务端session 签名
@@ -31,12 +29,22 @@ async function bootstrap() {
      */
 
     app.use(session({secret: "ayong", name: "ayong.sid", cookie: {maxAge: 99999}, rolling: true}));
+    /** 全集中间件 **/
     app.use(IkunAll)
+    /** 第三方中间件解决跨域 **/
     app.use(cors())
+
+    /** 开放服务器静态资源文件目录 供前端访问**/
+    app.useStaticAssets(join(__dirname,'images'),{
+        prefix:'/ayong'
+    })
+
+
+    /** 开启服务器端口 **/
     await app.listen(3000);
 
+    /** 关闭应用 **/
     setTimeout(() => {
-        //关闭应用
         // app.close()
     }, 1000)
 }
