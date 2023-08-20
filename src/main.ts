@@ -3,9 +3,13 @@ import {AppModule} from "./app.module";
 import {VersioningType} from "@nestjs/common";
 import * as cors from 'cors';
 import * as session from "express-session";
-import {Request, Response, NextFunction, json} from 'express'
+import {Request, Response, NextFunction} from 'express'
 import {NestExpressApplication} from "@nestjs/platform-express";
-import {join, extname} from "path";
+import {join} from "path";
+import {CommonRes} from "./common";
+import {HttpFlter} from "./common/http-flter";
+
+
 function IkunAll(req: Request, res: Response, next: NextFunction) {
     next();
 }
@@ -21,7 +25,7 @@ async function bootstrap() {
         type: VersioningType.URI
     });
     /**
-     * 微信公众号  阿勇学前端
+     * 微信公众号/B站  阿勇学前端
      * secret    生成服务端session 签名
      * name      生成客户端cookie 的名字 默认 connect.sid
      * cookie    设置返回到前端 key 的属性，长度: cookie:{maxAge:99999}。
@@ -34,9 +38,16 @@ async function bootstrap() {
     /** 第三方中间件解决跨域 **/
     app.use(cors())
 
+    /** 使用统一响应拦截器 **/
+    app.useGlobalInterceptors(new CommonRes())
+
+    /** 使用统一异常拦截器 **/
+    app.useGlobalFilters(new HttpFlter())
+
+
     /** 开放服务器静态资源文件目录 供前端访问**/
-    app.useStaticAssets(join(__dirname,'images'),{
-        prefix:'/ayong'
+    app.useStaticAssets(join(__dirname, 'images'), {
+        prefix: '/ayong'
     })
 
 
