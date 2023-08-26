@@ -14,6 +14,12 @@ function IkunAll(req: Request, res: Response, next: NextFunction) {
     next();
 }
 
+/**
+ * @author {微信公众号/B站  阿勇学前端}
+ *
+ * nestjs连接数据库 + 创建表 以及新增表字段+ 多表关联
+ * yarn add mysql2 typeorm @nestjs/typeorm
+ */
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
@@ -24,6 +30,8 @@ async function bootstrap() {
     app.enableVersioning({
         type: VersioningType.URI
     });
+
+
     /**
      * 微信公众号/B站  阿勇学前端
      * secret    生成服务端session 签名

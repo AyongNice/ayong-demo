@@ -1,7 +1,9 @@
 import {Get, Inject, Injectable} from "@nestjs/common";
+import {InjectRepository} from "@nestjs/typeorm";
+import {Repository} from "typeorm";
 @Injectable()
 export class AppService {
-  constructor() {
+  constructor( ) {
     // console.log('模块AppService---初始化----生命周期执行')
 
   }

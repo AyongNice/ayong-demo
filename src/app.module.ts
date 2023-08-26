@@ -2,12 +2,12 @@ import {MiddlewareConsumer, Module, NestModule, RequestMethod} from "@nestjs/com
 import {AppController} from "./app.controller";
 import {AppService} from "./app.service";
 import {AyongModule} from "./ayong/ayong.module";
-import {ConfigModule} from "@nestjs/config";
 import {WeekendModule} from './weekend/weekend.module';
 import {RestDaysModule} from './rest-days/rest-days.module';
 import {Config} from "./config";
+import { DatabaseModuleModule } from './database-module/database-module.module';
 import * as process from "process";
-import { join } from 'path';
+
 /**
  * 服务端
  * 模块
@@ -19,8 +19,15 @@ import { join } from 'path';
  * 生命周期
  * 钩子
  */
+
+
 @Module({
-    imports: [AyongModule, WeekendModule, RestDaysModule, Config.forRot({name: 'ayong学前端'})],
+    imports: [AyongModule,
+        WeekendModule,
+        RestDaysModule,
+        Config.forRot({name: 'ayong学前端'}),
+        DatabaseModuleModule,
+    ],
     controllers: [AppController],
     providers: [{provide: "阿勇服务", useClass: AppService}, {
         provide: "数据库配置", useValue: {

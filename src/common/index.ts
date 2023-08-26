@@ -20,10 +20,14 @@ interface T {
 @Injectable()
 export class CommonRes implements NestInterceptor {
     intercept(context: ExecutionContext, next: CallHandler): Observable<Res<T>> {
+        const request = context.switchToHttp().getRequest();
+        // const config = INJECTOR.get('USER_MODULE_CONFIG'); // 获取模块配置
+        // 从参数中获取自定义消息
+        // const customMsg = request.args[0] || '阿勇统一响应处理成功';
         return next.handle().pipe(map(data => ({
                 data,
                 status: 0,
-                msg: 'ayong的统一响应拦截OK了',
+                msg:'config.customMsg',
                 success: 0
             })
         ))

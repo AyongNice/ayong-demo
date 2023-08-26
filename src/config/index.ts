@@ -1,11 +1,9 @@
 import {DynamicModule, Global, MiddlewareConsumer, Module, NestModule, RequestMethod} from "@nestjs/common";
 
-
 const counten = {
     provide: 'api',
     useValue: {baseName: 'ayong666'}
 }
-
 
 @Global()
 @Module({
