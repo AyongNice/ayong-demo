@@ -3,10 +3,6 @@ import {DatabaseModuleService} from './database-module.service';
 import {DatabaseModuleController} from './database-module.controller';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Member, Users} from "./entities/database-module.entity";
-
-/**
- *  使用 docker 拉取mysql镜像 开启mysql容器 创建数据库 关注B站 阿勇学前端 主页 docker教学
- */
 @Module({
     imports: [
         TypeOrmModule.forRoot({

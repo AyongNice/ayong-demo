@@ -1,4 +1,4 @@
-import {Controller, Get, Inject, Post} from "@nestjs/common";
+import {Body, Controller, Get, Inject, Post} from "@nestjs/common";
 import {AppService} from "./app.service";
 import {WeekendService} from './weekend/weekend.service'
 import {RestDaysService} from './rest-days/rest-days.service'
@@ -6,6 +6,11 @@ import {Config} from "./config/index";
 
 interface Configs {
     [key: string]: string;
+}
+
+interface Res {
+    data: any;
+
 }
 
 @Controller()
@@ -30,8 +35,16 @@ export class AppController {
 
     }
 
+    @Post('login')
+    login(@Body() body: any): Res {
+        // 假设验证通过后
+        const data = this.appService.generateToken({userId: '123'});
+        console.log(data)
+        return {data}
+    }
+
     @Get("ayong")
-    getHello():any {
+    getHello(): any {
         return this.diyConfig;
     }
 

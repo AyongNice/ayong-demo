@@ -22,7 +22,6 @@ export class Users extends BaseEntity {
     @Column()
     @Index('idx_username')
     username: string;
-
     /**
      * 防止手机号重复
      */
@@ -35,13 +34,26 @@ export class Users extends BaseEntity {
 
     @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     startTime: Date;
-
-
     /**
      * 主表关联 会员表信息字段 分表查询
+     * nullable 值可以为 空
      */
     @Column({ nullable: true })
-    identification: number
+    identification: number;
+
+    //成绩
+    @Column({ nullable: true })
+    score: number;
+
+    //年龄
+    @Column({ nullable: true })
+    age: number;
+
+    //籍贯
+    @Column({ nullable: true })
+    nativePlace: string;
+
+
 }
 
 

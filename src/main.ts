@@ -8,10 +8,12 @@ import {NestExpressApplication} from "@nestjs/platform-express";
 import {join} from "path";
 import {CommonRes} from "./common";
 import {HttpFlter} from "./common/http-flter";
+import Token from "./common/token";
 
-
+const token = Token.getInstance()
 function IkunAll(req: Request, res: Response, next: NextFunction) {
     next();
+    // res.send('关注微信公众号 阿勇学前端')
 }
 
 /**
