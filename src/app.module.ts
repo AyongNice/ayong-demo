@@ -5,7 +5,7 @@ import {AyongModule} from "./ayong/ayong.module";
 import {WeekendModule} from './weekend/weekend.module';
 import {RestDaysModule} from './rest-days/rest-days.module';
 import {Config} from "./config";
-import { DatabaseModuleModule } from './database-module/database-module.module';
+import {DatabaseModuleModule} from './database-module/database-module.module';
 import * as process from "process";
 
 /**
@@ -26,31 +26,34 @@ import * as process from "process";
         WeekendModule,
         RestDaysModule,
         Config.forRot({name: 'ayong学前端'}),
-        DatabaseModuleModule,
+        // DatabaseModuleModule,
     ],
     controllers: [AppController],
-    providers: [{provide: "阿勇服务", useClass: AppService}, {
-        provide: "数据库配置", useValue: {
-            主机: "192.168.566",
-            密码: "80082088",
-            用户名: "ayong",
-            端口号: "8080"
-        }
-    }, {
-        provide: "动态全局值",
-        useFactory: () => {
-            if (process.env.NODE_ENV === "production") {
-                return "http://ayongnice.love/chatgpt";
-            } else {
-                return "http://192.168.566:8080";
+    providers: [
+        {provide: "阿勇服务", useClass: AppService}, {
+            provide: "数据库配置", useValue: {
+                主机: "192.168.566",
+                密码: "80082088",
+                用户名: "ayong",
+                端口号: "8080"
             }
-        }
+        },
+        {provide: "httpKey", useValue: {key: "MySuperSecretKey"}},
 
-    }
+        {
+            provide: "动态全局值",
+            useFactory: () => {
+                if (process.env.NODE_ENV === "production") {
+                    return "http://ayongnice.love/chatgpt";
+                } else {
+                    return "http://192.168.566:8080";
+                }
+            }
+
+        }
     ]
 })
 export class AppModule {
-
 
 
     onModuleInit() {
